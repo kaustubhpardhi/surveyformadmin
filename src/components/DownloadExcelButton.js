@@ -9,8 +9,8 @@ const DownloadExcelButton = () => {
   const [FormsData, setFormsData] = useState([]);
 
   const headers = [
+    { label: "Timestamp", key: "createdAt" },
     { label: "Property Owner Name", key: "ownerName" },
-    // { label: "Timestamp", key: "" },
     { label: "Size of Shop in Sq.ft", key: "size" },
     { label: "Zone", key: "zone" },
     { label: "Shop Owner Name", key: "shopOwner" },
@@ -28,6 +28,7 @@ const DownloadExcelButton = () => {
     { label: "Gender", key: "gender" },
     { label: "Since", key: "since" },
     { label: "Ward No 1-90", key: "ward" },
+    { label: "LatLong", key: "latlong" },
   ];
 
   useEffect(() => {
