@@ -29,6 +29,7 @@ const DownloadExcelButton = () => {
     { label: "Since", key: "since" },
     { label: "Ward No 1-90", key: "ward" },
     { label: "LatLong", key: "latlong" },
+    { label: "Property Image", key: "url" },
   ];
 
   useEffect(() => {

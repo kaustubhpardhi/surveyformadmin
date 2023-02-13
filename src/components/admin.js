@@ -63,6 +63,7 @@ const Admin = () => {
                   <TableCell align="center"> Since </TableCell>
                   <TableCell align="center"> Ward No. </TableCell>
                   <TableCell align="center"> Lat-Long </TableCell>
+                  <TableCell align="center"> Property Image </TableCell>
                 </TableRow>
               </TableHead>
               {
@@ -91,6 +92,15 @@ const Admin = () => {
                       <TableCell align="center"> {row.since} </TableCell>
                       <TableCell align="center"> {row.ward} </TableCell>
                       <TableCell align="center"> {row.latlong} </TableCell>
+                      <TableCell align="center">
+                        <a
+                          href={row.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {row.url}
+                        </a>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
