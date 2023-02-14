@@ -14,7 +14,7 @@ import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import DownloadExcelButton from "./DownloadExcelButton";
 import "./admin.css";
 import logo from "./meerut.jpg";
-
+import bob from "./bob.png";
 const Admin = () => {
   const [forms, setForms] = useState([]);
   useEffect(() => {
@@ -33,6 +33,9 @@ const Admin = () => {
         </div>
         <div className="excel-button">
           <DownloadExcelButton />
+        </div>
+        <div className="bank-logo">
+          <img src={bob} alt="bob" className="bob"></img>
         </div>
       </div>
       <div className="table-title">

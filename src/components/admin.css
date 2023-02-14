@@ -48,4 +48,12 @@ img {
     width: 4rem;
     margin-left: 1rem;
   }
+  .bob {
+    height: 50px;
+    width: 100px;
+    order: 1;
+  }
+}
+.bob {
+  height: 70px;
 }
