@@ -49,11 +49,14 @@ img {
     margin-left: 1rem;
   }
   .bob {
-    height: 50px;
-    width: 100px;
+    height: 30px;
+    width: 120px;
     order: 1;
+    margin-top: 10px;
   }
 }
 .bob {
-  height: 70px;
+  height: 60px;
+  width: 120px;
+  margin-top: 10px;
 }

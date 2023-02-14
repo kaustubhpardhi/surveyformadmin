@@ -14,7 +14,7 @@ import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
 import DownloadExcelButton from "./DownloadExcelButton";
 import "./admin.css";
 import logo from "./meerut.jpg";
-import bob from "./bob.png";
+import bob from "./bob.webp";
 const Admin = () => {
   const [forms, setForms] = useState([]);
   useEffect(() => {
