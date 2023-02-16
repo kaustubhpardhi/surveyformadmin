@@ -9,6 +9,7 @@ import { Box } from "@mui/material";
 import Drawer from "./components/Drawer";
 import Footer from "./components/footer";
 import Dashboard from "./components/dashboard";
+import DownloadExcelButton from "./components/DownloadExcelButton";
 const drawerWidth = 280;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -57,6 +58,14 @@ function App() {
                 element={
                   <RequireAuth>
                     <Dashboard />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/excel"
+                element={
+                  <RequireAuth>
+                    <DownloadExcelButton />
                   </RequireAuth>
                 }
               />

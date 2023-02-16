@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
+import "./DownloadExcelButton.css";
 
 import { CSVLink } from "react-csv";
 const DownloadExcelButton = () => {
@@ -50,6 +51,7 @@ const DownloadExcelButton = () => {
 
   return (
     <div className="excel">
+      <h2 className="excel-title"> Get Excel File Of Your Form Entries </h2>
       <div>
         <Button variant="contained" color="eighth">
           <CSVLink

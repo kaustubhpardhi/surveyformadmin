@@ -77,6 +77,15 @@ export default function PersistentDrawerLeft({
           >
             <DrawerListItem text="Dashboard" icon={<AccountBoxIcon />} />
           </NavLink>
+          <NavLink
+            style={{
+              textDecoration: "none",
+            }}
+            className="navLink"
+            to="/excel"
+          >
+            <DrawerListItem text="Download Excel" icon={<FileDownloadIcon />} />
+          </NavLink>
 
           <div style={{ marginTop: "auto", textAlign: "center" }}>
             <Button
