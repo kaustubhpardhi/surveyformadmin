@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Box } from "@mui/material";
 import Drawer from "./components/Drawer";
 import Footer from "./components/footer";
-
+import Dashboard from "./components/dashboard";
 const drawerWidth = 280;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -34,29 +34,37 @@ function App() {
   const [receipt, setReceipt] = useState({});
   return (
     <div className="App">
-      {/* <Box sx={{ mt: 5 }}>
+      <Box sx={{ mt: 5 }}>
         <div style={{ display: "flex" }}>
           <Drawer
             sideBar={sideBar}
             setSideBar={setSideBar}
             drawerWidth={drawerWidth}
-          /> */}
-      {/* <Main open={sideBar} sx={{ pb: 0, pt: 4 } }> */}
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route
-          path="/admin"
-          element={
-            <RequireAuth>
-              <Admin />
-            </RequireAuth>
-          }
-        />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-      {/* </Main>
+          />
+          <Main open={sideBar} sx={{ pb: 0, pt: 4 }}>
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route
+                path="/admin"
+                element={
+                  <RequireAuth>
+                    <Admin />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/dashboard"
+                element={
+                  <RequireAuth>
+                    <Dashboard />
+                  </RequireAuth>
+                }
+              />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </Main>
         </div>
-      </Box> */}
+      </Box>
       <Footer />
     </div>
   );

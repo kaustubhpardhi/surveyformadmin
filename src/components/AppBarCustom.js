@@ -6,6 +6,9 @@ import { styled } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
 import "./AppBarCustom.css";
 import { Button } from "@mui/material";
+import DownloadExcelButton from "./DownloadExcelButton";
+import logo from "./meerut.jpg";
+import bob from "./bob.webp";
 
 const AppBarCustom = ({ sideBar, setSideBar, drawerWidth }) => {
   let user = JSON.parse(localStorage.getItem("user"));
@@ -53,29 +56,40 @@ const AppBarCustom = ({ sideBar, setSideBar, drawerWidth }) => {
         position="fixed"
         open={sideBar}
         component="nav"
-        sx={{ background: "#fafbfb", boxShadow: "none" }}
+        sx={{ background: "white", boxShadow: "none" }}
       >
-        <Toolbar>
-          {user ? (
-            <IconButton
-              size="large"
-              edge="start"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-              onClick={() => setSideBar(!sideBar)}
-            >
-              <MenuIcon />
-            </IconButton>
-          ) : (
-            <img
-              className="logo"
-              // src={logo}
-              alt=""
-              style={{ maxWidth: "130px", padding: "5px 0" }}
-            />
-          )}
+        <div className="headers">
+          <div className="headers-title">
+            {user ? (
+              <IconButton
+                size="large"
+                edge="start"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+                onClick={() => setSideBar(!sideBar)}
+              >
+                <MenuIcon />
+              </IconButton>
+            ) : (
+              <img
+                className="logo"
+                // src={logo}
+                alt=""
+                style={{ maxWidth: "130px", padding: "5px 0" }}
+              />
+            )}
+            <img src={logo} alt="logo"></img>
+            <h2>MEERUT NAGAR NIGAM MERCHANT DATABASE ONBORDING</h2>
+          </div>
+          {/* <div className="excel-button">
+            <DownloadExcelButton />
+          </div> */}
+          <div className="bank-logo">
+            <img src={bob} alt="bob" className="bob"></img>
+          </div>
+        </div>
 
-          {/* <img
+        {/* <img
             src={BOB}
             style={{
               maxWidth: "180px",
@@ -84,7 +98,6 @@ const AppBarCustom = ({ sideBar, setSideBar, drawerWidth }) => {
             }}
             alt="Logo"
           /> */}
-        </Toolbar>
       </AppBar>
     </div>
   );

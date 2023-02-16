@@ -26,21 +26,10 @@ const Admin = () => {
 
   return (
     <div className="admin">
-      <div className="headers">
-        <div className="headers-title">
-          <img src={logo} alt="logo"></img>
-          <h2>MEERUT NAGAR NIGAM MERCHANT DATABASE ONBORDING</h2>
-        </div>
-        <div className="excel-button">
-          <DownloadExcelButton />
-        </div>
-        <div className="bank-logo">
-          <img src={bob} alt="bob" className="bob"></img>
-        </div>
-      </div>
       <div className="table-title">
         <p>Form Entries 👇</p>
       </div>
+
       <div className="forms-table">
         <Paper sx={{ width: "100%", borderRadius: 2, ml: 2, mr: 2 }}>
           <TableContainer sx={{}}>
