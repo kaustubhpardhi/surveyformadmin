@@ -37,8 +37,12 @@ const Dashboard = () => {
   const [zoneCount, setZoneCount] = useState(0);
 
   const [zone, setZone] = useState();
+  const [fse, setFse] = useState();
+  const [fseCount, setFseCount] = useState(0);
   console.log(zone);
   const zonelist = ["1", "2", "3", "4"];
+  const fsecodelist = ["SJF02", "SJF04", "SJF05", "SJF06", "SJF07", "SJF08"];
+
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, "0");
   var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
@@ -63,6 +67,15 @@ const Dashboard = () => {
     };
     axios.post("/form/totalcountward", postdata).then((res) => {
       setZoneCount(res.data.totalforms);
+    });
+  };
+
+  const handleFse = () => {
+    const postdata = {
+      fse: fse,
+    };
+    axios.post("/form/totalcountfse", postdata).then((res) => {
+      setFseCount(res.data.totalforms);
     });
   };
 
@@ -182,6 +195,66 @@ const Dashboard = () => {
               gutterBottom
             >
               {zoneCount}
+            </Typography>
+          </CardContent>
+        </Card>
+      </div>
+      <div className="ward-feature">
+        <FormControl>
+          <FormLabel
+            sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
+            htmlFor="for"
+          >
+            Check zone wise count
+          </FormLabel>
+          <Select
+            id="city"
+            placeholder="Choose"
+            sx={{ width: "100%" }}
+            color="third"
+            size="small"
+            defaultValue={0}
+            value={fse}
+            onChange={(e) => setFse(e.target.value)}
+          >
+            <MenuItem value={0} disabled>
+              Choose
+            </MenuItem>
+            {fsecodelist.map((item) => (
+              <MenuItem key={item} value={item}>
+                {item}
+              </MenuItem>
+            ))}
+          </Select>
+          <button onClick={handleFse} className="button-5">
+            Filter
+          </button>
+        </FormControl>
+        <Card
+          sx={{
+            boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
+            borderRadius: "15px",
+            p: 2,
+
+            width: "15rem",
+            height: "10rem",
+            className: "zoneCard",
+          }}
+        >
+          <CardContent>
+            <Typography
+              sx={{ fontSize: 18, fontWeight: "600" }}
+              color={grey[500]}
+              gutterBottom
+            >
+              Form Entries In FSE Code
+            </Typography>
+            <Typography
+              sx={{ fontSize: 24, fontWeight: "600" }}
+              color={green[600]}
+              gutterBottom
+            >
+              {fseCount}
             </Typography>
           </CardContent>
         </Card>
