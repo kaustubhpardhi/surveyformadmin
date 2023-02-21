@@ -37,6 +37,7 @@ const Dashboard = () => {
   const [zoneCount, setZoneCount] = useState(0);
 
   const [zone, setZone] = useState();
+  const [sjf, setSjf] = useState();
   const [fse, setFse] = useState();
   const [fseCount, setFseCount] = useState(0);
   const [entries, setEntries] = useState([]);
@@ -68,17 +69,20 @@ const Dashboard = () => {
       setEntries(res.data.packages);
     });
   }, []);
-  useEffect(() => {
+  const handleDate = () => {
     if (selectedDate) {
       // filter entries by selected date and update state
       const filtered = entries.filter((entry) => {
         const entryDate = new Date(entry.createdAt);
         const selectedDateObj = new Date(selectedDate);
-        return entryDate.toDateString() === selectedDateObj.toDateString();
+        return (
+          entryDate.toDateString() === selectedDateObj.toDateString() &&
+          entry.fse.toLowerCase() === sjf.toLowerCase()
+        );
       });
       setFilteredEntries(filtered.length);
     }
-  }, [selectedDate, entries]);
+  };
 
   const handleZone = () => {
     const postdata = {
@@ -225,7 +229,9 @@ const Dashboard = () => {
               sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
               htmlFor="for"
             >
-              Check zone wise count
+              Check Total
+              <br />
+              FSE Code wise count
             </FormLabel>
             <Select
               id="city"
@@ -287,7 +293,9 @@ const Dashboard = () => {
               sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
               htmlFor="for"
             >
-              Check zone wise count
+              Check FSE Code wise count
+              <br />
+              on particular date
             </FormLabel>
             <input
               type="date"
@@ -295,6 +303,32 @@ const Dashboard = () => {
               value={selectedDate}
               onChange={(event) => setSelectedDate(event.target.value)}
             />
+            <div className="date-code">
+              <FormControl>
+                <Select
+                  id="city"
+                  placeholder="Choose"
+                  sx={{ width: "100%" }}
+                  color="third"
+                  size="small"
+                  defaultValue={0}
+                  value={sjf}
+                  onChange={(e) => setSjf(e.target.value)}
+                >
+                  <MenuItem value={0} disabled>
+                    Choose
+                  </MenuItem>
+                  {fsecodelist.map((item) => (
+                    <MenuItem key={item} value={item}>
+                      {item}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <button onClick={handleDate} className="button-5">
+                  Filter
+                </button>
+              </FormControl>
+            </div>
           </div>
           <div>
             <Card
