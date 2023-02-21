@@ -39,10 +39,12 @@ const Dashboard = () => {
   const [zone, setZone] = useState();
   const [fse, setFse] = useState();
   const [fseCount, setFseCount] = useState(0);
-  console.log(zone);
+  const [entries, setEntries] = useState([]);
+  const [filteredEntries, setFilteredEntries] = useState([]);
+  const [selectedDate, setSelectedDate] = useState("");
   const zonelist = ["1", "2", "3", "4"];
   const fsecodelist = ["SJF02", "SJF04", "SJF05", "SJF06", "SJF07", "SJF08"];
-
+  console.log(filteredEntries);
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, "0");
   var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
@@ -60,6 +62,23 @@ const Dashboard = () => {
       setTodaysCount(res.data.count);
     });
   }, []);
+  useEffect(() => {
+    axios.post("/form/getforms", {}).then((res) => {
+      console.log(res.data.packages);
+      setEntries(res.data.packages);
+    });
+  }, []);
+  useEffect(() => {
+    if (selectedDate) {
+      // filter entries by selected date and update state
+      const filtered = entries.filter((entry) => {
+        const entryDate = new Date(entry.createdAt);
+        const selectedDateObj = new Date(selectedDate);
+        return entryDate.toDateString() === selectedDateObj.toDateString();
+      });
+      setFilteredEntries(filtered.length);
+    }
+  }, [selectedDate, entries]);
 
   const handleZone = () => {
     const postdata = {
@@ -139,125 +158,175 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       </div>
-      <div className="ward-feature">
-        <FormControl>
-          <FormLabel
-            sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
-            htmlFor="for"
-          >
-            Check zone wise count
-          </FormLabel>
-          <Select
-            id="city"
-            placeholder="Choose"
-            sx={{ width: "100%" }}
-            color="third"
-            size="small"
-            defaultValue={0}
-            value={zone}
-            onChange={(e) => setZone(e.target.value)}
-          >
-            <MenuItem value={0} disabled>
-              Choose
-            </MenuItem>
-            {zonelist.map((item) => (
-              <MenuItem key={item} value={item}>
-                {item}
+      <div className="filters">
+        <div className="ward-feature">
+          <FormControl>
+            <FormLabel
+              sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
+              htmlFor="for"
+            >
+              Check zone wise count
+            </FormLabel>
+            <Select
+              id="city"
+              placeholder="Choose"
+              sx={{ width: "100%" }}
+              color="third"
+              size="small"
+              defaultValue={0}
+              value={zone}
+              onChange={(e) => setZone(e.target.value)}
+            >
+              <MenuItem value={0} disabled>
+                Choose
               </MenuItem>
-            ))}
-          </Select>
-          <button onClick={handleZone} className="button-5">
-            Filter
-          </button>
-        </FormControl>
-        <Card
-          sx={{
-            boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
-            borderRadius: "15px",
-            p: 2,
+              {zonelist.map((item) => (
+                <MenuItem key={item} value={item}>
+                  {item}
+                </MenuItem>
+              ))}
+            </Select>
+            <button onClick={handleZone} className="button-5">
+              Filter
+            </button>
+          </FormControl>
+          <Card
+            sx={{
+              boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
+              borderRadius: "15px",
+              p: 2,
 
-            width: "15rem",
-            height: "10rem",
-            className: "zoneCard",
-          }}
-        >
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 18, fontWeight: "600" }}
-              color={grey[500]}
-              gutterBottom
+              width: "15rem",
+              height: "10rem",
+              className: "zoneCard",
+            }}
+          >
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 18, fontWeight: "600" }}
+                color={grey[500]}
+                gutterBottom
+              >
+                Form Entries In Zone
+              </Typography>
+              <Typography
+                sx={{ fontSize: 24, fontWeight: "600" }}
+                color={green[600]}
+                gutterBottom
+              >
+                {zoneCount}
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+        <div className="ward-feature">
+          <FormControl>
+            <FormLabel
+              sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
+              htmlFor="for"
             >
-              Form Entries In Zone
-            </Typography>
-            <Typography
-              sx={{ fontSize: 24, fontWeight: "600" }}
-              color={green[600]}
-              gutterBottom
+              Check zone wise count
+            </FormLabel>
+            <Select
+              id="city"
+              placeholder="Choose"
+              sx={{ width: "100%" }}
+              color="third"
+              size="small"
+              defaultValue={0}
+              value={fse}
+              onChange={(e) => setFse(e.target.value)}
             >
-              {zoneCount}
-            </Typography>
-          </CardContent>
-        </Card>
+              <MenuItem value={0} disabled>
+                Choose
+              </MenuItem>
+              {fsecodelist.map((item) => (
+                <MenuItem key={item} value={item}>
+                  {item}
+                </MenuItem>
+              ))}
+            </Select>
+            <button onClick={handleFse} className="button-5">
+              Filter
+            </button>
+          </FormControl>
+          <Card
+            sx={{
+              boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
+              borderRadius: "15px",
+              p: 2,
+
+              width: "15rem",
+              height: "10rem",
+              className: "zoneCard",
+            }}
+          >
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 18, fontWeight: "600" }}
+                color={grey[500]}
+                gutterBottom
+              >
+                Form Entries In FSE Code
+              </Typography>
+              <Typography
+                sx={{ fontSize: 24, fontWeight: "600" }}
+                color={green[600]}
+                gutterBottom
+              >
+                {fseCount}
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
       </div>
-      <div className="ward-feature">
-        <FormControl>
-          <FormLabel
-            sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
-            htmlFor="for"
-          >
-            Check zone wise count
-          </FormLabel>
-          <Select
-            id="city"
-            placeholder="Choose"
-            sx={{ width: "100%" }}
-            color="third"
-            size="small"
-            defaultValue={0}
-            value={fse}
-            onChange={(e) => setFse(e.target.value)}
-          >
-            <MenuItem value={0} disabled>
-              Choose
-            </MenuItem>
-            {fsecodelist.map((item) => (
-              <MenuItem key={item} value={item}>
-                {item}
-              </MenuItem>
-            ))}
-          </Select>
-          <button onClick={handleFse} className="button-5">
-            Filter
-          </button>
-        </FormControl>
-        <Card
-          sx={{
-            boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
-            borderRadius: "15px",
-            p: 2,
+      <div className="filters">
+        <div className="ward-feature">
+          <div className="date">
+            <FormLabel
+              sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
+              htmlFor="for"
+            >
+              Check zone wise count
+            </FormLabel>
+            <input
+              type="date"
+              className="date-input"
+              value={selectedDate}
+              onChange={(event) => setSelectedDate(event.target.value)}
+            />
+          </div>
+          <div>
+            <Card
+              sx={{
+                boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
+                borderRadius: "15px",
+                p: 2,
 
-            width: "15rem",
-            height: "10rem",
-            className: "zoneCard",
-          }}
-        >
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 18, fontWeight: "600" }}
-              color={grey[500]}
-              gutterBottom
+                width: "15rem",
+                height: "10rem",
+                className: "zoneCard",
+              }}
             >
-              Form Entries In FSE Code
-            </Typography>
-            <Typography
-              sx={{ fontSize: 24, fontWeight: "600" }}
-              color={green[600]}
-              gutterBottom
-            >
-              {fseCount}
-            </Typography>
-          </CardContent>
-        </Card>
+              <CardContent>
+                <Typography
+                  sx={{ fontSize: 18, fontWeight: "600" }}
+                  color={grey[500]}
+                  gutterBottom
+                >
+                  Form Entries on Date {selectedDate}
+                </Typography>
+                <Typography
+                  sx={{ fontSize: 24, fontWeight: "600" }}
+                  color={green[600]}
+                  gutterBottom
+                >
+                  {filteredEntries}
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
