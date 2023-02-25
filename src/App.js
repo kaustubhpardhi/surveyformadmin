@@ -10,6 +10,7 @@ import Drawer from "./components/Drawer";
 import Footer from "./components/footer";
 import Dashboard from "./components/dashboard";
 import DownloadExcelButton from "./components/DownloadExcelButton";
+import Surveyor from "./components/surveyor";
 const drawerWidth = 280;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -70,6 +71,7 @@ function App() {
                 }
               />
               <Route path="/login" element={<Login />} />
+              <Route path="/surveyor" element={<Surveyor />} />
             </Routes>
           </Main>
         </div>

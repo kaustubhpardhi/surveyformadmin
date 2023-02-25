@@ -44,6 +44,8 @@ const Dashboard = () => {
   const [filteredEntries, setFilteredEntries] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const zonelist = ["1", "2", "3", "4"];
+  // const fsecodelist = ["02", "04", "05", "06", "07", "08"];
+
   const fsecodelist = ["SJF02", "SJF04", "SJF05", "SJF06", "SJF07", "SJF08"];
   console.log(filteredEntries);
   var today = new Date();
@@ -72,12 +74,14 @@ const Dashboard = () => {
   const handleDate = () => {
     if (selectedDate) {
       // filter entries by selected date and update state
+
       const filtered = entries.filter((entry) => {
         const entryDate = new Date(entry.createdAt);
         const selectedDateObj = new Date(selectedDate);
+        const fseCode = entry.fse.toUpperCase();
         return (
           entryDate.toDateString() === selectedDateObj.toDateString() &&
-          entry.fse.toLowerCase() === sjf.toLowerCase()
+          entry.fse.trim().toLowerCase() === sjf.trim().toLowerCase()
         );
       });
       setFilteredEntries(filtered.length);

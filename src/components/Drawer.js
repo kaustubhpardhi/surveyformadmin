@@ -86,7 +86,18 @@ export default function PersistentDrawerLeft({
           >
             <DrawerListItem text="Download Excel" icon={<FileDownloadIcon />} />
           </NavLink>
-
+          {/* <NavLink
+            style={{
+              textDecoration: "none",
+            }}
+            className="navLink"
+            to="/surveyor"
+          >
+            <DrawerListItem
+              text="Surveyor Registration"
+              icon={<FileDownloadIcon />}
+            />
+          </NavLink> */}
           <div style={{ marginTop: "auto", textAlign: "center" }}>
             <Button
               variant="contained"
