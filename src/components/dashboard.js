@@ -46,7 +46,15 @@ const Dashboard = () => {
   const zonelist = ["1", "2", "3", "4"];
   // const fsecodelist = ["02", "04", "05", "06", "07", "08"];
 
-  const fsecodelist = ["SJF02", "SJF04", "SJF05", "SJF06", "SJF07", "SJF08"];
+  const fsecodelist = [
+    "SJF02",
+    "SJF04",
+    "SJF05",
+    "SJF06",
+    "SJF07",
+    "SJF08",
+    "SJF09",
+  ];
   console.log(filteredEntries);
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, "0");
