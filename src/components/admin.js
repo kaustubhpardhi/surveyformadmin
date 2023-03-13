@@ -19,8 +19,7 @@ const Admin = () => {
   const [forms, setForms] = useState([]);
   useEffect(() => {
     axios.post("/form/getforms", {}).then((res) => {
-      console.log(res.data.packages);
-      setForms(res.data.packages);
+      setForms(res.data.data);
     });
   }, []);
 

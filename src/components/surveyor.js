@@ -42,11 +42,17 @@ const Surveyor = () => {
 
     try {
       const response = await axios.post("/surveyor/addsurveyor", postdata);
-      alert(response);
+      const message = response.data.message;
+      alert(message);
     } catch (error) {
       console.log(error);
       alert("Surveyor Registration Failed");
     }
+  };
+  const resetForm = () => {
+    setSurveyorName("");
+    setSurveyorId("");
+    setSurveyorPass("");
   };
   return (
     <div className="surveyor">

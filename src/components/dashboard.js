@@ -54,6 +54,8 @@ const Dashboard = () => {
     "SJF07",
     "SJF08",
     "SJF09",
+    "SJF10",
+    "SJF11",
   ];
   console.log(filteredEntries);
   var today = new Date();
