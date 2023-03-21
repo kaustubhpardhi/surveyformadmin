@@ -19,9 +19,11 @@ const Admin = () => {
   const [forms, setForms] = useState([]);
   useEffect(() => {
     axios.post("/form/getforms", {}).then((res) => {
-      setForms(res.data.data);
+      console.log(res.data.data);
+      setForms(res.data.packages);
     });
   }, []);
+  console.log(forms);
 
   return (
     <div className="admin">
@@ -59,41 +61,42 @@ const Admin = () => {
               </TableHead>
               {
                 <TableBody>
-                  {forms.map((row, index) => (
-                    <TableRow key={row.pawatiNumber} hover role="checkbox">
-                      <TableCell align="center">{row.ownerName} </TableCell>
-                      <TableCell align="center"> {row.size} </TableCell>
-                      <TableCell align="center"> {row.zone} </TableCell>
-                      <TableCell align="center"> {row.shopOwner} </TableCell>
-                      <TableCell align="center">{row.fhName} </TableCell>
-                      <TableCell align="center"> {row.email} </TableCell>
-                      <TableCell align="center"> {row.shopName} </TableCell>
-                      <TableCell align="center"> {row.number} </TableCell>
-                      <TableCell align="center"> {row.shopName} </TableCell>
-                      <TableCell align="center"> {row.category} </TableCell>
-                      <TableCell align="center"> {row.employees} </TableCell>
-                      <TableCell align="center"> {row.fse} </TableCell>
-                      <TableCell align="center"> {row.occupation} </TableCell>
-                      <TableCell align="center"> {row.license} </TableCell>
-                      <TableCell align="center">
-                        {" "}
-                        {row.qualification}{" "}
-                      </TableCell>
-                      <TableCell align="center"> {row.gender} </TableCell>
-                      <TableCell align="center"> {row.since} </TableCell>
-                      <TableCell align="center"> {row.ward} </TableCell>
-                      <TableCell align="center"> {row.latlong} </TableCell>
-                      <TableCell align="center">
-                        <a
-                          href={row.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {row.url}
-                        </a>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {forms &&
+                    forms.map((row, index) => (
+                      <TableRow key={row.pawatiNumber} hover role="checkbox">
+                        <TableCell align="center">{row.ownerName} </TableCell>
+                        <TableCell align="center"> {row.size} </TableCell>
+                        <TableCell align="center"> {row.zone} </TableCell>
+                        <TableCell align="center"> {row.shopOwner} </TableCell>
+                        <TableCell align="center">{row.fhName} </TableCell>
+                        <TableCell align="center"> {row.email} </TableCell>
+                        <TableCell align="center"> {row.shopName} </TableCell>
+                        <TableCell align="center"> {row.number} </TableCell>
+                        <TableCell align="center"> {row.shopName} </TableCell>
+                        <TableCell align="center"> {row.category} </TableCell>
+                        <TableCell align="center"> {row.employees} </TableCell>
+                        <TableCell align="center"> {row.fse} </TableCell>
+                        <TableCell align="center"> {row.occupation} </TableCell>
+                        <TableCell align="center"> {row.license} </TableCell>
+                        <TableCell align="center">
+                          {" "}
+                          {row.qualification}{" "}
+                        </TableCell>
+                        <TableCell align="center"> {row.gender} </TableCell>
+                        <TableCell align="center"> {row.since} </TableCell>
+                        <TableCell align="center"> {row.ward} </TableCell>
+                        <TableCell align="center"> {row.latlong} </TableCell>
+                        <TableCell align="center">
+                          <a
+                            href={row.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {row.url}
+                          </a>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               }
             </Table>
