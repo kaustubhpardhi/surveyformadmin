@@ -43,6 +43,10 @@ const Dashboard = () => {
   const [entries, setEntries] = useState([]);
   const [filteredEntries, setFilteredEntries] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [datefse, setDatefse] = useState("");
+  const [dateRangeEntries, setDateRangeEntries] = useState("");
   const zonelist = ["1", "2", "3", "4"];
   // const fsecodelist = ["02", "04", "05", "06", "07", "08"];
 
@@ -120,6 +124,22 @@ const Dashboard = () => {
     });
   };
 
+  const handleDateRange = () => {
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const dateRangeEntries = entries.filter((entry) => {
+        const entryDate = new Date(entry.createdAt).getTime();
+        return (
+          entry.fse.trim().toLowerCase() === datefse.trim().toLowerCase() &&
+          entryDate >= start.getTime() &&
+          entryDate < end.getTime() + 24 * 60 * 60 * 1000
+        );
+      });
+      setDateRangeEntries(dateRangeEntries.length);
+    }
+  };
+  console.log(dateRangeEntries);
   return (
     <div className="container">
       <div className="dashboard">
@@ -303,7 +323,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </div>
-      </div>
+      </div>{" "}
       <div className="filters">
         <div className="ward-feature">
           <div className="date">
@@ -374,6 +394,100 @@ const Dashboard = () => {
                   gutterBottom
                 >
                   {filteredEntries}
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>{" "}
+      <div className="filters">
+        <div className="ward-feature">
+          <div className="date">
+            <FormLabel
+              sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
+              htmlFor="for"
+            >
+              Check FSE Code wise count
+              <br />
+              on a date range
+            </FormLabel>
+            <FormLabel
+              sx={{ mb: 1, color: "grey[500]", fontWeight: "400" }}
+              htmlFor="for"
+            >
+              Start Date
+            </FormLabel>
+            <input
+              type="date"
+              className="date-input"
+              value={startDate}
+              onChange={(event) => setStartDate(event.target.value)}
+            />
+            <FormLabel
+              sx={{ mb: 1, color: "grey[500]", fontWeight: "400" }}
+              htmlFor="for"
+            >
+              End Date
+            </FormLabel>
+            <input
+              type="date"
+              className="date-input"
+              value={endDate}
+              onChange={(event) => setEndDate(event.target.value)}
+            />
+            <div className="date-code">
+              <FormControl>
+                <Select
+                  id="city"
+                  placeholder="Choose"
+                  sx={{ width: "100%" }}
+                  color="third"
+                  size="small"
+                  defaultValue={0}
+                  value={datefse}
+                  onChange={(e) => setDatefse(e.target.value)}
+                >
+                  <MenuItem value={0} disabled>
+                    Choose
+                  </MenuItem>
+                  {fsecodelist.map((item) => (
+                    <MenuItem key={item} value={item}>
+                      {item}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <button onClick={handleDateRange} className="button-5">
+                  Filter
+                </button>
+              </FormControl>
+            </div>
+          </div>
+          <div>
+            <Card
+              sx={{
+                boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
+                borderRadius: "15px",
+                p: 2,
+
+                width: "15rem",
+                height: "10rem",
+                className: "zoneCard",
+              }}
+            >
+              <CardContent>
+                <Typography
+                  sx={{ fontSize: 18, fontWeight: "600" }}
+                  color={grey[500]}
+                  gutterBottom
+                >
+                  Form Entries on Date {selectedDate}
+                </Typography>
+                <Typography
+                  sx={{ fontSize: 24, fontWeight: "600" }}
+                  color={green[600]}
+                  gutterBottom
+                >
+                  {dateRangeEntries}
                 </Typography>
               </CardContent>
             </Card>
