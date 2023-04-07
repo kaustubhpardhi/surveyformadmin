@@ -29,7 +29,7 @@ const DownloadExcelButton = () => {
     { label: "Gender", key: "gender" },
     { label: "Since", key: "since" },
     { label: "Ward No 1-90", key: "ward" },
-    { label: "LatLong", key: "latlong" },
+    { label: "Lat-Long", key: "latlong" },
     { label: "Property Image", key: "url" },
   ];
 
