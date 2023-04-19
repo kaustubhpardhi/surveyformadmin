@@ -17,14 +17,22 @@ import logo from "./meerut.jpg";
 import bob from "./bob.webp";
 const Admin = () => {
   const [forms, setForms] = useState([]);
+  const [loading, setLoading] = useState([true]);
   useEffect(() => {
     axios.post("/form/getforms", {}).then((res) => {
       console.log(res.data.data);
       setForms(res.data.packages);
+      setLoading(false);
     });
   }, []);
   console.log(forms);
-
+  if (loading) {
+    return (
+      <div className="screenCenter">
+        <CircularProgress color="success" />
+      </div>
+    );
+  }
   return (
     <div className="admin">
       <div className="table-title">
