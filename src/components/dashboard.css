@@ -6,15 +6,19 @@
 }
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
-  gap: 10px;
+  gap: 80px;
 }
 .ward-feature {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 30px;
   padding: 10px;
+  background-color: whitesmoke;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
 }
 .button-5 {
   align-items: center;
@@ -82,4 +86,31 @@
 .date-code {
   margin-top: 10px;
   margin-left: -60px;
+}
+.filters {
+  display: flex;
+  flex-direction: row;
+}
+.date-feature {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 10px;
+  background-color: whitesmoke;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+}
+.dashboard-1 {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.dashboard-2 {
+  margin-top: 40px;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
 }

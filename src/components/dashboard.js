@@ -141,208 +141,76 @@ const Dashboard = () => {
   };
   console.log(dateRangeEntries);
   return (
-    <div className="container">
-      <div className="dashboard">
-        <Card
-          sx={{
-            boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
-            borderRadius: "15px",
-            p: 2,
-            mt: 2,
-            width: "15rem",
-            height: "10rem",
-            className: "totalReceipts",
-          }}
-        >
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 18, fontWeight: "600" }}
-              color={grey[500]}
-              gutterBottom
+    <div className="dash-screen">
+      <div className="container">
+        <div className="dashboard-1">
+          <div className="dashboard">
+            <Card
+              sx={{
+                boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
+                borderRadius: "15px",
+                p: 2,
+                mt: 2,
+                width: "15rem",
+                height: "10rem",
+                className: "totalReceipts",
+              }}
             >
-              Total Form Entries
-            </Typography>
-            <Typography
-              sx={{ fontSize: 24, fontWeight: "bold" }}
-              color={green[600]}
-              gutterBottom
+              <CardContent>
+                <Typography
+                  sx={{ fontSize: 18, fontWeight: "600" }}
+                  color={grey[500]}
+                  gutterBottom
+                >
+                  Total Form Entries
+                </Typography>
+                <Typography
+                  sx={{ fontSize: 24, fontWeight: "bold" }}
+                  color={green[600]}
+                  gutterBottom
+                >
+                  {totalFormEntries}
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card
+              sx={{
+                boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
+                borderRadius: "15px",
+                p: 2,
+                mt: 2,
+                width: "18rem",
+                height: "10rem",
+                className: "totalReceipts",
+              }}
             >
-              {totalFormEntries}
-            </Typography>
-          </CardContent>
-        </Card>
-        <Card
-          sx={{
-            boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
-            borderRadius: "15px",
-            p: 2,
-            mt: 2,
-            width: "18rem",
-            height: "10rem",
-            className: "totalReceipts",
-          }}
-        >
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 18, fontWeight: "600" }}
-              color={grey[500]}
-              gutterBottom
-            >
-              Today's Form Entries {today}
-            </Typography>
-            <Typography
-              sx={{ fontSize: 24, fontWeight: "bold" }}
-              color={green[600]}
-              gutterBottom
-            >
-              {todaysCount}
-            </Typography>
-          </CardContent>
-        </Card>
-      </div>
-      <div className="filters">
-        <div className="ward-feature">
-          <FormControl>
-            <FormLabel
-              sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
-              htmlFor="for"
-            >
-              Check zone wise count
-            </FormLabel>
-            <Select
-              id="city"
-              placeholder="Choose"
-              sx={{ width: "100%" }}
-              color="third"
-              size="small"
-              defaultValue={0}
-              value={zone}
-              onChange={(e) => setZone(e.target.value)}
-            >
-              <MenuItem value={0} disabled>
-                Choose
-              </MenuItem>
-              {zonelist.map((item) => (
-                <MenuItem key={item} value={item}>
-                  {item}
-                </MenuItem>
-              ))}
-            </Select>
-            <button onClick={handleZone} className="button-5">
-              Filter
-            </button>
-          </FormControl>
-          <Card
-            sx={{
-              boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
-              borderRadius: "15px",
-              p: 2,
-
-              width: "15rem",
-              height: "10rem",
-              className: "zoneCard",
-            }}
-          >
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 18, fontWeight: "600" }}
-                color={grey[500]}
-                gutterBottom
-              >
-                Form Entries In Zone
-              </Typography>
-              <Typography
-                sx={{ fontSize: 24, fontWeight: "600" }}
-                color={green[600]}
-                gutterBottom
-              >
-                {zoneCount}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className="ward-feature">
-          <FormControl>
-            <FormLabel
-              sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
-              htmlFor="for"
-            >
-              Check Total
-              <br />
-              FSE Code wise count
-            </FormLabel>
-            <Select
-              id="city"
-              placeholder="Choose"
-              sx={{ width: "100%" }}
-              color="third"
-              size="small"
-              defaultValue={0}
-              value={fse}
-              onChange={(e) => setFse(e.target.value)}
-            >
-              <MenuItem value={0} disabled>
-                Choose
-              </MenuItem>
-              {fsecodelist.map((item) => (
-                <MenuItem key={item} value={item}>
-                  {item}
-                </MenuItem>
-              ))}
-            </Select>
-            <button onClick={handleFse} className="button-5">
-              Filter
-            </button>
-          </FormControl>
-          <Card
-            sx={{
-              boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
-              borderRadius: "15px",
-              p: 2,
-
-              width: "15rem",
-              height: "10rem",
-              className: "zoneCard",
-            }}
-          >
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 18, fontWeight: "600" }}
-                color={grey[500]}
-                gutterBottom
-              >
-                Form Entries In FSE Code
-              </Typography>
-              <Typography
-                sx={{ fontSize: 24, fontWeight: "600" }}
-                color={green[600]}
-                gutterBottom
-              >
-                {fseCount}
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-      </div>{" "}
-      <div className="filters">
-        <div className="ward-feature">
-          <div className="date">
-            <FormLabel
-              sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
-              htmlFor="for"
-            >
-              Check FSE Code wise count
-              <br />
-              on particular date
-            </FormLabel>
-            <input
-              type="date"
-              className="date-input"
-              value={selectedDate}
-              onChange={(event) => setSelectedDate(event.target.value)}
-            />
-            <div className="date-code">
+              <CardContent>
+                <Typography
+                  sx={{ fontSize: 18, fontWeight: "600" }}
+                  color={grey[500]}
+                  gutterBottom
+                >
+                  Today's Form Entries {today}
+                </Typography>
+                <Typography
+                  sx={{ fontSize: 24, fontWeight: "bold" }}
+                  color={green[600]}
+                  gutterBottom
+                >
+                  {todaysCount}
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+          <div className="filters">
+            <div className="ward-feature">
               <FormControl>
+                <FormLabel
+                  sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
+                  htmlFor="for"
+                >
+                  Check zone wise count
+                </FormLabel>
                 <Select
                   id="city"
                   placeholder="Choose"
@@ -350,8 +218,70 @@ const Dashboard = () => {
                   color="third"
                   size="small"
                   defaultValue={0}
-                  value={sjf}
-                  onChange={(e) => setSjf(e.target.value)}
+                  value={zone}
+                  onChange={(e) => setZone(e.target.value)}
+                >
+                  <MenuItem value={0} disabled>
+                    Choose
+                  </MenuItem>
+                  {zonelist.map((item) => (
+                    <MenuItem key={item} value={item}>
+                      {item}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <button onClick={handleZone} className="button-5">
+                  Filter
+                </button>
+              </FormControl>
+              <Card
+                sx={{
+                  boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
+                  borderRadius: "15px",
+                  p: 2,
+
+                  width: "15rem",
+                  height: "10rem",
+                  className: "zoneCard",
+                }}
+              >
+                <CardContent>
+                  <Typography
+                    sx={{ fontSize: 18, fontWeight: "600" }}
+                    color={grey[500]}
+                    gutterBottom
+                  >
+                    Form Entries In Zone
+                  </Typography>
+                  <Typography
+                    sx={{ fontSize: 24, fontWeight: "600" }}
+                    color={green[600]}
+                    gutterBottom
+                  >
+                    {zoneCount}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </div>
+            <div className="ward-feature">
+              <FormControl>
+                <FormLabel
+                  sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
+                  htmlFor="for"
+                >
+                  Check Total
+                  <br />
+                  FSE Code wise count
+                </FormLabel>
+                <Select
+                  id="city"
+                  placeholder="Choose"
+                  sx={{ width: "100%" }}
+                  color="third"
+                  size="small"
+                  defaultValue={0}
+                  value={fse}
+                  onChange={(e) => setFse(e.target.value)}
                 >
                   <MenuItem value={0} disabled>
                     Choose
@@ -362,135 +292,207 @@ const Dashboard = () => {
                     </MenuItem>
                   ))}
                 </Select>
-                <button onClick={handleDate} className="button-5">
+                <button onClick={handleFse} className="button-5">
                   Filter
                 </button>
               </FormControl>
-            </div>
-          </div>
-          <div>
-            <Card
-              sx={{
-                boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
-                borderRadius: "15px",
-                p: 2,
+              <Card
+                sx={{
+                  boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
+                  borderRadius: "15px",
+                  p: 2,
 
-                width: "15rem",
-                height: "10rem",
-                className: "zoneCard",
-              }}
-            >
-              <CardContent>
-                <Typography
-                  sx={{ fontSize: 18, fontWeight: "600" }}
-                  color={grey[500]}
-                  gutterBottom
-                >
-                  Form Entries on Date {selectedDate}
-                </Typography>
-                <Typography
-                  sx={{ fontSize: 24, fontWeight: "600" }}
-                  color={green[600]}
-                  gutterBottom
-                >
-                  {filteredEntries}
-                </Typography>
-              </CardContent>
-            </Card>
+                  width: "15rem",
+                  height: "10rem",
+                  className: "zoneCard",
+                }}
+              >
+                <CardContent>
+                  <Typography
+                    sx={{ fontSize: 18, fontWeight: "600" }}
+                    color={grey[500]}
+                    gutterBottom
+                  >
+                    Form Entries In FSE Code
+                  </Typography>
+                  <Typography
+                    sx={{ fontSize: 24, fontWeight: "600" }}
+                    color={green[600]}
+                    gutterBottom
+                  >
+                    {fseCount}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
-      </div>{" "}
-      <div className="filters">
-        <div className="ward-feature">
-          <div className="date">
-            <FormLabel
-              sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
-              htmlFor="for"
-            >
-              Check FSE Code wise count
-              <br />
-              on a date range
-            </FormLabel>
-            <FormLabel
-              sx={{ mb: 1, color: "grey[500]", fontWeight: "400" }}
-              htmlFor="for"
-            >
-              Start Date
-            </FormLabel>
-            <input
-              type="date"
-              className="date-input"
-              value={startDate}
-              onChange={(event) => setStartDate(event.target.value)}
-            />
-            <FormLabel
-              sx={{ mb: 1, color: "grey[500]", fontWeight: "400" }}
-              htmlFor="for"
-            >
-              End Date
-            </FormLabel>
-            <input
-              type="date"
-              className="date-input"
-              value={endDate}
-              onChange={(event) => setEndDate(event.target.value)}
-            />
-            <div className="date-code">
-              <FormControl>
-                <Select
-                  id="city"
-                  placeholder="Choose"
-                  sx={{ width: "100%" }}
-                  color="third"
-                  size="small"
-                  defaultValue={0}
-                  value={datefse}
-                  onChange={(e) => setDatefse(e.target.value)}
-                >
-                  <MenuItem value={0} disabled>
-                    Choose
-                  </MenuItem>
-                  {fsecodelist.map((item) => (
-                    <MenuItem key={item} value={item}>
-                      {item}
+        <div className="dashboard-2">
+          <div className="date-feature">
+            <div className="date">
+              <FormLabel
+                sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
+                htmlFor="for"
+              >
+                Check FSE Code wise count
+                <br />
+                on particular date
+              </FormLabel>
+              <input
+                type="date"
+                className="date-input"
+                value={selectedDate}
+                onChange={(event) => setSelectedDate(event.target.value)}
+              />
+              <div className="date-code">
+                <FormControl>
+                  <Select
+                    id="city"
+                    placeholder="Choose"
+                    sx={{ width: "100%" }}
+                    color="third"
+                    size="small"
+                    defaultValue={0}
+                    value={sjf}
+                    onChange={(e) => setSjf(e.target.value)}
+                  >
+                    <MenuItem value={0} disabled>
+                      Choose
                     </MenuItem>
-                  ))}
-                </Select>
-                <button onClick={handleDateRange} className="button-5">
-                  Filter
-                </button>
-              </FormControl>
+                    {fsecodelist.map((item) => (
+                      <MenuItem key={item} value={item}>
+                        {item}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <button onClick={handleDate} className="button-5">
+                    Filter
+                  </button>
+                </FormControl>
+              </div>
+            </div>
+            <div>
+              <Card
+                sx={{
+                  boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
+                  borderRadius: "15px",
+                  p: 2,
+
+                  width: "15rem",
+                  height: "10rem",
+                  className: "zoneCard",
+                }}
+              >
+                <CardContent>
+                  <Typography
+                    sx={{ fontSize: 18, fontWeight: "600" }}
+                    color={grey[500]}
+                    gutterBottom
+                  >
+                    Form Entries on Date {selectedDate}
+                  </Typography>
+                  <Typography
+                    sx={{ fontSize: 24, fontWeight: "600" }}
+                    color={green[600]}
+                    gutterBottom
+                  >
+                    {filteredEntries}
+                  </Typography>
+                </CardContent>
+              </Card>
             </div>
           </div>
-          <div>
-            <Card
-              sx={{
-                boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
-                borderRadius: "15px",
-                p: 2,
+          <div className="date-feature">
+            <div className="date">
+              <FormLabel
+                sx={{ mb: 1, color: "grey[500]", fontWeight: "600" }}
+                htmlFor="for"
+              >
+                Check FSE Code wise count
+                <br />
+                on a date range
+              </FormLabel>
+              <FormLabel
+                sx={{ mb: 1, color: "grey[500]", fontWeight: "400" }}
+                htmlFor="for"
+              >
+                Start Date
+              </FormLabel>
+              <input
+                type="date"
+                className="date-input"
+                value={startDate}
+                onChange={(event) => setStartDate(event.target.value)}
+              />
+              <FormLabel
+                sx={{ mb: 1, color: "grey[500]", fontWeight: "400" }}
+                htmlFor="for"
+              >
+                End Date
+              </FormLabel>
+              <input
+                type="date"
+                className="date-input"
+                value={endDate}
+                onChange={(event) => setEndDate(event.target.value)}
+              />
+              <div className="date-code">
+                <FormControl>
+                  <Select
+                    id="city"
+                    placeholder="Choose"
+                    sx={{ width: "100%" }}
+                    color="third"
+                    size="small"
+                    defaultValue={0}
+                    value={datefse}
+                    onChange={(e) => setDatefse(e.target.value)}
+                  >
+                    <MenuItem value={0} disabled>
+                      Choose
+                    </MenuItem>
+                    {fsecodelist.map((item) => (
+                      <MenuItem key={item} value={item}>
+                        {item}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <button onClick={handleDateRange} className="button-5">
+                    Filter
+                  </button>
+                </FormControl>
+              </div>
+            </div>
+            <div>
+              <Card
+                sx={{
+                  boxShadow: "rgb(90 114 123 / 11%) 0px 7px 30px 0px",
+                  borderRadius: "15px",
+                  p: 2,
 
-                width: "15rem",
-                height: "10rem",
-                className: "zoneCard",
-              }}
-            >
-              <CardContent>
-                <Typography
-                  sx={{ fontSize: 18, fontWeight: "600" }}
-                  color={grey[500]}
-                  gutterBottom
-                >
-                  Form Entries on Date {selectedDate}
-                </Typography>
-                <Typography
-                  sx={{ fontSize: 24, fontWeight: "600" }}
-                  color={green[600]}
-                  gutterBottom
-                >
-                  {dateRangeEntries}
-                </Typography>
-              </CardContent>
-            </Card>
+                  width: "15rem",
+                  height: "10rem",
+                  className: "zoneCard",
+                }}
+              >
+                <CardContent>
+                  <Typography
+                    sx={{ fontSize: 18, fontWeight: "600" }}
+                    color={grey[500]}
+                    gutterBottom
+                  >
+                    Form Entries on Date {selectedDate}
+                  </Typography>
+                  <Typography
+                    sx={{ fontSize: 24, fontWeight: "600" }}
+                    color={green[600]}
+                    gutterBottom
+                  >
+                    {dateRangeEntries}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </div>
