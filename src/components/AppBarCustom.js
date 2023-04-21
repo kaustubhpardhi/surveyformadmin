@@ -79,7 +79,7 @@ const AppBarCustom = ({ sideBar, setSideBar, drawerWidth }) => {
               />
             )}
             <img src={logo} alt="logo"></img>
-            <h2>MEERUT NAGAR NIGAM MERCHANT DATABASE ONBORDING</h2>
+            <h2>MEERUT NAGAR NIGAM MERCHANT DATABASE ONBOARDING</h2>
           </div>
           <div className="bank-logo">
             <img src={bob} alt="bob" className="bob"></img>

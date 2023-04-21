@@ -57,8 +57,9 @@ const theme = createTheme({
     fontWeight: "400",
   },
 });
-axios.defaults.baseURL = "https://brv7qd.deta.dev";
+//axios.defaults.baseURL = "https://brv7qd.deta.dev";
 //axios.defaults.baseURL = "http://localhost:8081";
+axios.defaults.baseURL = "https://surveyformbackend-98c8.onrender.com";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
