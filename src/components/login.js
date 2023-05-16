@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import logo from "./meerut.jpg";
+import Hcaptcha from "react-hcaptcha";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,11 +11,14 @@ const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [change, setChange] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
 
-  const [userData] = useState({
-    id: "admin",
-    password: "123",
-  });
+  const [userData] = useState([
+    {
+      id: "admin",
+      password: "Surveyform@admin769",
+    },
+  ]);
 
   // localStorage
   let user = localStorage.getItem("user");
@@ -25,16 +29,53 @@ const Login = () => {
     }
   }, [user, change, navigate]);
 
+  const setCookie = (name, value, secure = false) => {
+    const cookieOptions = {
+      path: "/",
+      sameSite: "lax",
+      // Set the HTTPOnly flag to prevent client-side JavaScript from accessing the cookie
+      httpOnly: true,
+    };
+
+    // If the application is accessed over HTTPS, set the secure flag
+    if (window.location.protocol === "https:") {
+      cookieOptions.secure = true;
+    }
+
+    const cookieString = Object.entries(cookieOptions)
+      .map(([key, val]) => `${key}=${val}`)
+      .join("; ");
+
+    document.cookie = `${name}=${value}; ${cookieString}`;
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
-    if (userData.id !== id) {
-      return alert("User not found");
+    const currentUser = userData.find((u) => u.id === id);
+    if (!captchaToken) {
+      alert("Please complete the captcha!");
+      return;
     }
-    if (userData.password !== password) {
-      return alert("User and password doesn't match");
+    if (!currentUser) {
+      return alert("User and password not found");
     }
-    localStorage.setItem("user", true);
+    if (currentUser.password !== password) {
+      return alert("User and password not found");
+    }
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ id: currentUser.id, role: currentUser.role })
+    );
     setChange(!change);
+    setCookie(
+      "user",
+      JSON.stringify({ id: currentUser.id, role: currentUser.role }),
+      true
+    );
+  };
+
+  const handleCaptchaChange = (token) => {
+    setCaptchaToken(token);
   };
 
   return (
@@ -67,11 +108,11 @@ const Login = () => {
             overflow: "hidden",
           }}
         >
-          <div className="login-img">
+          <div className="loginImg">
             <img src={logo} className="logo" alt="loginImage" />
           </div>
           <div>
-            <Box component="form" onSubmit={submitHandler}>
+            <Box component="form" onSubmit={submitHandler} autoComplete="off">
               <Box sx={{ p: 4 }}>
                 <Typography
                   variant="h5"
@@ -92,6 +133,7 @@ const Login = () => {
                     color="eighth"
                     size="small"
                     placeholder="Username"
+                    autocomplete="off"
                   />
                 </FormControl>
                 <FormControl sx={{ display: "block", my: 2 }}>
@@ -105,9 +147,13 @@ const Login = () => {
                     size="small"
                     type="password"
                     placeholder="Password"
+                    autocomplete="off"
                   />
                 </FormControl>
-
+                <Hcaptcha
+                  sitekey="29c1c5da-4977-472a-be41-6862ba94aa36"
+                  onVerify={handleCaptchaChange}
+                />
                 <Box sx={{ mt: 3, textAlign: "center" }}>
                   <Button
                     variant="contained"

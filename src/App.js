@@ -1,4 +1,6 @@
 import "./App.css";
+import { Helmet } from "react-helmet";
+import { useEffect } from "react";
 import Login from "./components/login";
 import RequireAuth from "./components/RequireAuth";
 import { Routes, Route } from "react-router-dom";
@@ -34,6 +36,45 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
 function App() {
   const [sideBar, setSideBar] = useState(false);
   const [receipt, setReceipt] = useState({});
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      localStorage.removeItem("user");
+    };
+
+    const handleUnload = (event) => {
+      if (!event.persisted) {
+        localStorage.removeItem("user");
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("unload", handleUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("unload", handleUnload);
+    };
+  }, []);
+  useEffect(() => {
+    // Set Cache-Control: no-store header
+    const setNoStoreHeader = () => {
+      const meta = document.createElement("meta");
+      meta.httpEquiv = "Cache-Control";
+      meta.content = "no-store";
+      document.head.appendChild(meta);
+    };
+
+    // Set Pragma: no-cache header
+    const setNoCacheHeader = () => {
+      const meta = document.createElement("meta");
+      meta.httpEquiv = "Pragma";
+      meta.content = "no-cache";
+      document.head.appendChild(meta);
+    };
+
+    setNoStoreHeader();
+    setNoCacheHeader();
+  }, []);
   return (
     <div className="App">
       <Box sx={{ mt: 5 }}>
@@ -71,7 +112,7 @@ function App() {
                 }
               />
               <Route path="/login" element={<Login />} />
-              <Route path="/surveyor" element={<Surveyor />} />
+              {/* <Route path="/surveyor" element={<Surveyor />} /> */}
             </Routes>
           </Main>
         </div>

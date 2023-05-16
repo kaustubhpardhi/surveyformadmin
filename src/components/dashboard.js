@@ -73,11 +73,9 @@ const Dashboard = () => {
 
   today = mm + "/" + dd + "/" + yyyy;
 
-  useEffect(() => {
-    axios.get("/form/totalcount").then((res) => {
-      setTotalFormEntries(res.data.totalforms);
-    });
-  });
+  // useEffect(() => {
+  //   axios.get("/form/totalcount").then((res) => {});
+  // });
   useEffect(() => {
     axios.get("/form/totalcounttoday").then((res) => {
       setTodaysCount(res.data.count);
@@ -85,10 +83,12 @@ const Dashboard = () => {
   }, []);
   useEffect(() => {
     axios.post("/form/getforms", {}).then((res) => {
-      console.log(res.data.packages);
-      setEntries(res.data.packages);
+      setEntries(res.data.data);
+      setTotalFormEntries(res.data.data.length);
     });
   }, []);
+  console.log(totalFormEntries);
+
   const handleDate = () => {
     if (selectedDate) {
       // filter entries by selected date and update state

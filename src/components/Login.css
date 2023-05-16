@@ -1,4 +1,4 @@
-.loginImg {
+/* .loginImg {
   height: 120px;
   margin-left: 20px;
   margin-bottom: 10px;
@@ -8,7 +8,18 @@
   margin-bottom: 30px;
   width: 120px;
   height: 120px;
+} */
+.loginImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.loginImg .logo {
+  width: 50%;
+  height: 50%; /* Adjust the desired width */
+}
+
 /* @media (max-width: 500px) {
   .loginImg {
     margin-left: 100px;
