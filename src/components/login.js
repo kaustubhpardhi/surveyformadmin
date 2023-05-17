@@ -112,7 +112,7 @@ const Login = () => {
             <img src={logo} className="logo" alt="loginImage" />
           </div>
           <div>
-            <Box component="form" onSubmit={submitHandler} autoComplete="off">
+            <Box component="form" onSubmit={submitHandler} autocomplete="off">
               <Box sx={{ p: 4 }}>
                 <Typography
                   variant="h5"
