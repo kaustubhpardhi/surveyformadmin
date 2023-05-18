@@ -52,10 +52,10 @@ const Login = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     const currentUser = userData.find((u) => u.id === id);
-    if (!captchaToken) {
-      alert("Please complete the captcha!");
-      return;
-    }
+    // if (!captchaToken) {
+    //   alert("Please complete the captcha!");
+    //   return;
+    // }
     if (!currentUser) {
       return alert("User and password not found");
     }
@@ -112,7 +112,7 @@ const Login = () => {
             <img src={logo} className="logo" alt="loginImage" />
           </div>
           <div>
-            <Box component="form" onSubmit={submitHandler} autocomplete="off">
+            <Box component="form" onSubmit={submitHandler} autoComplete="off">
               <Box sx={{ p: 4 }}>
                 <Typography
                   variant="h5"
@@ -139,7 +139,6 @@ const Login = () => {
                 <FormControl sx={{ display: "block", my: 2 }}>
                   <TextField
                     required
-                    value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     fullWidth
                     id="password"
@@ -147,13 +146,13 @@ const Login = () => {
                     size="small"
                     type="password"
                     placeholder="Password"
-                    autocomplete="off"
+                    autoComplete="off"
                   />
                 </FormControl>
-                <Hcaptcha
+                {/* <Hcaptcha
                   sitekey="29c1c5da-4977-472a-be41-6862ba94aa36"
                   onVerify={handleCaptchaChange}
-                />
+                /> */}
                 <Box sx={{ mt: 3, textAlign: "center" }}>
                   <Button
                     variant="contained"

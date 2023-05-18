@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "no-store"
+          "value": "no-cache, must-revalidate"
         },
         {
           "key": "Pragma",
@@ -14,6 +14,10 @@
         {
           "key": "X-XSS-Protection",
           "value": "1; mode=block"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
         }
       ]
     }
