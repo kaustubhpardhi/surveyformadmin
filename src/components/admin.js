@@ -198,6 +198,7 @@ const Admin = () => {
                   <TableCell align="center"> Gender </TableCell>
                   <TableCell align="center"> Since </TableCell>
                   <TableCell align="center"> Ward No. </TableCell>
+                  <TableCell align="center"> Area </TableCell>
                   <TableCell align="center"> Lat-Long </TableCell>
                   <TableCell align="center"> Property Image </TableCell>
                 </TableRow>
@@ -223,6 +224,7 @@ const Admin = () => {
                     <TableCell align="center">{row.gender}</TableCell>
                     <TableCell align="center">{row.since}</TableCell>
                     <TableCell align="center"> {row.ward} </TableCell>
+                    <TableCell align="center"> {row.area} </TableCell>
                     <TableCell align="center"> {row.latlong} </TableCell>
                     <TableCell align="center">
                       <a
